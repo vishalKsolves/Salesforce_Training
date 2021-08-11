@@ -12,6 +12,10 @@
         $A.enqueueAction(action);
      },
     handleSelection : function (component) {
+        component.set("v.selectedFields",[]);
+        component.set("v.sObjects",[]);
+        component.set("v.queryBoxText","");
+        component.set("v.isNotEmpty",false);
         let selectedOption = component.find("dropdown").get("v.value");
         let action = component.get("c.getFields");
         action.setParams(
@@ -35,6 +39,13 @@
         $A.enqueueAction(action);
     },
     getQueryText : function(component, event, helper){
+        component.set("v.isNotEmpty",false);
+        component.set("v.sObjects",[]);
+        if(component.get("v.selectedFields").length == 0)
+        {
+            component.set("v.queryBoxText","");
+            return;
+        }
         let selectedOption = component.get("v.selectedValue");
         let queryText = "SELECT ";
         let selectedValues = helper.getSelectedFields(component); 
@@ -51,6 +62,7 @@
         component.set("v.queryBoxText",queryText);
     },
     getQueryResult : function(component, event, helper){
+        
         let query = component.get("v.queryBoxText");
         let selectedValues = helper.getSelectedFields(component);
         let action = component.get("c.getQueryResults");
@@ -66,6 +78,7 @@
             {
                 let sObjectList = response.getReturnValue();
                 component.set("v.sObjects", sObjectList);
+                component.set("v.isNotEmpty",true);
             }
         });
         $A.enqueueAction(action);
