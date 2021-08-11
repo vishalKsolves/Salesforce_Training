@@ -1,0 +1,57 @@
+<aura:component controller="QueryBuilder">
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <aura:attribute name="selectedValue" type="String" />
+    <aura:attribute name="options" type="List" />
+
+    <!-- Dual List Box Attribute -->
+    <aura:attribute name="dualOptions" type="List" />
+    <aura:attribute name="selectedFields" type="List" />
+
+    <aura:attribute name="queryBoxText" type="String" default=" " />
+
+    <aura:attribute name="sObjects" type="List[]" />
+    <!-- Dual List Box Attribute -->
+
+    <article class="slds-card slds-align_absolute-center" style="width: 50%;">
+        <lightning:select aura:id="dropdown" name="objects" label="Select an object :"
+        value="{!v.selectedValue}" required="true" onchange="{! c.handleSelection}">
+            <aura:iteration items="{!v.options}" var="objectName" >
+                <option value="{!objectName}" text="{!objectName}" />
+            </aura:iteration>
+        </lightning:select>
+    </article>
+    <article class="slds-card slds-align_absolute-center" style="width: 50%;">
+        <lightning:dualListbox name="fields"
+                           label= "Select Fields"
+                           sourceLabel="Available Fields"
+                           selectedLabel="Selected Fields"
+                           fieldLevelHelp="Select fields to query"
+                           options="{!v.dualOptions}"
+                           value="{!v.selectedFields}"
+                           onchange="{! c.getQueryText }"/>
+    </article>
+    <article class="slds-card slds-align_absolute-center" style="width: 50%;">
+        <lightning:textarea name="querybox" readonly="true" value="{!v.queryBoxText}" label="Query result" />
+    </article>
+    <div class="slds-align_absolute-center">
+        <lightning:button variant="brand" label="Query" onclick="{!c.getQueryResult}"/>
+    </div>
+    
+    <article class="slds-card slds-align_absolute-center" style="width: 50%;">
+        <table>
+            
+            <aura:iteration items="{!v.selectedFields}" var="header">
+                <th>{!header}</th>
+            </aura:iteration>
+            <aura:iteration items="{!v.sObjects}" var="sObject" >
+                <tr>
+                    <aura:iteration items="{!sObject}" var="data">
+                        <td>{!data}</td>
+                    </aura:iteration>
+                </tr>
+            </aura:iteration>
+        </table>
+    </article>
+
+    
+</aura:component>

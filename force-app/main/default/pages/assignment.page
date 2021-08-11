@@ -1,0 +1,63 @@
+<apex:page controller="MyController">
+    <apex:stylesheet value="{!$Resource.institute}" />
+    
+    <apex:form >
+        <apex:selectList multiselect="false" size="1" value="{!instId}">
+            <apex:selectOption itemValue="" itemLabel="-- Select Institute --"/>
+            <apex:selectOptions value="{!strings}"/>
+            <apex:actionSupport event="onchange" action="{!myMentors}" rerender="mentorInfo" status="counterStatus"/>
+        </apex:selectList>
+
+    <br/><br/>
+    
+    <apex:outputPanel id="mentorInfo" >
+        <apex:outputPanel rendered="{!NOT ISNULL(instId)}">
+    <table>
+        <caption><i>All Mentors</i></caption>
+        <tr>
+          <th>Mentor Name</th>
+          <th>Designation</th>
+        </tr>
+            <apex:repeat var="mentor" value="{!mentors}">
+            <tr>
+                <td>
+                    <apex:commandLink value="{!mentor.Name}" action="{!students}">
+                        <apex:param value="{!mentor.Id}" assignTo="{!mentorId}" name="m"/>
+                    </apex:commandLink>
+                </td>
+                <td>{!mentor.Designation__c}</td>
+            </tr>
+        
+            <apex:outputPanel id="studentInfo" rendered="{!IF(mentor.Id==mentorId, true, false)}">
+                <tr>
+                    <td class="blank"></td>
+                    <td>
+                    <table>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Class</th>
+                            <th>City</th>
+                            <th>State</th>
+                        </tr>
+                        <apex:repeat var="student" value="{!students}">
+                            <tr>
+                                <td>{!student.Name}</td>
+                                <td>{!student.Class__c}</td>
+                                <td>{!student.City__c}</td>
+                                <td>{!student.State__c}</td>
+                            </tr>
+                        </apex:repeat>
+                    </table>
+                </td>
+            </tr>
+            </apex:outputPanel>
+        </apex:repeat>
+      </table>
+    </apex:outputPanel>
+        
+    </apex:outputPanel>
+
+
+    </apex:form>
+
+</apex:page>

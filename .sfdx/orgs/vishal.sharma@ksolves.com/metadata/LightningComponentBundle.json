@@ -1,0 +1,16 @@
+{
+  "status": 0,
+  "result": {
+    "createdById": "0055g00000APsXHAA1",
+    "createdByName": "Vishal Sharma",
+    "createdDate": "2021-08-03T08:54:28.000Z",
+    "fileName": "lwc/helloWorld",
+    "fullName": "helloWorld",
+    "id": "0Rb5g000000inMOCAY",
+    "lastModifiedById": "0055g00000APsXHAA1",
+    "lastModifiedByName": "Vishal Sharma",
+    "lastModifiedDate": "2021-08-03T08:54:28.000Z",
+    "manageableState": "unmanaged",
+    "type": "LightningComponentBundle"
+  }
+}

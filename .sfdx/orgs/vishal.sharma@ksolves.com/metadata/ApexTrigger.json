@@ -1,0 +1,44 @@
+{
+  "status": 0,
+  "result": [
+    {
+      "createdById": "0055g00000APsXHAA1",
+      "createdByName": "Vishal Sharma",
+      "createdDate": "2021-07-26T04:41:00.000Z",
+      "fileName": "triggers/ClosedOpportunityTrigger.trigger",
+      "fullName": "ClosedOpportunityTrigger",
+      "id": "01q5g000000pUChAAM",
+      "lastModifiedById": "0055g00000APsXHAA1",
+      "lastModifiedByName": "Vishal Sharma",
+      "lastModifiedDate": "2021-07-26T04:57:02.000Z",
+      "manageableState": "unmanaged",
+      "type": "ApexTrigger"
+    },
+    {
+      "createdById": "0055g00000APsXHAA1",
+      "createdByName": "Vishal Sharma",
+      "createdDate": "2021-07-23T12:34:27.000Z",
+      "fileName": "triggers/AccountAddressTrigger.trigger",
+      "fullName": "AccountAddressTrigger",
+      "id": "01q5g000000pTrtAAE",
+      "lastModifiedById": "0055g00000APsXHAA1",
+      "lastModifiedByName": "Vishal Sharma",
+      "lastModifiedDate": "2021-07-23T12:34:27.000Z",
+      "manageableState": "unmanaged",
+      "type": "ApexTrigger"
+    },
+    {
+      "createdById": "0055g00000APsXHAA1",
+      "createdByName": "Vishal Sharma",
+      "createdDate": "2021-07-23T11:06:53.000Z",
+      "fileName": "triggers/myTrigger.trigger",
+      "fullName": "myTrigger",
+      "id": "01q5g000000pTj4AAE",
+      "lastModifiedById": "0055g00000APsXHAA1",
+      "lastModifiedByName": "Vishal Sharma",
+      "lastModifiedDate": "2021-07-23T11:06:53.000Z",
+      "manageableState": "unmanaged",
+      "type": "ApexTrigger"
+    }
+  ]
+}
