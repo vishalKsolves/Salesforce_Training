@@ -1,5 +1,5 @@
 ({
-    init: function(component, event, helper) {
+    init: function(component,event,helper) {
         var action = component.get("c.getObjectName");
         action.setCallback(this, function(response) {
             var state = response.getState();
@@ -11,7 +11,7 @@
         });
         $A.enqueueAction(action);
      },
-    handleSelection : function (component, event) {
+    handleSelection : function (component) {
         let selectedOption = component.find("dropdown").get("v.value");
         let action = component.get("c.getFields");
         action.setParams(
@@ -34,7 +34,7 @@
         });
         $A.enqueueAction(action);
     },
-    getQueryText : function(component, helper){
+    getQueryText : function(component, event, helper){
         let selectedOption = component.get("v.selectedValue");
         let queryText = "SELECT ";
         let selectedValues = helper.getSelectedFields(component); 
@@ -50,9 +50,9 @@
         queryText += " FROM " + selectedOption;
         component.set("v.queryBoxText",queryText);
     },
-    getQueryResult : function(component, helper){
+    getQueryResult : function(component, event, helper){
         let query = component.get("v.queryBoxText");
-        let selectedValues = helper.getSelectedFields();
+        let selectedValues = helper.getSelectedFields(component);
         let action = component.get("c.getQueryResults");
         action.setParams(
             {

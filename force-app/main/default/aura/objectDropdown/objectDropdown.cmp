@@ -12,7 +12,7 @@
     <aura:attribute name="sObjects" type="List[]" />
     <!-- Dual List Box Attribute -->
 
-    <article class="slds-card slds-align_absolute-center" style="width: 50%;">
+    <article class="slds-card slds-align_absolute-center" style="width: 80%;">
         <lightning:select aura:id="dropdown" name="objects" label="Select an object :"
         value="{!v.selectedValue}" required="true" onchange="{! c.handleSelection}">
             <aura:iteration items="{!v.options}" var="objectName" >
@@ -20,7 +20,7 @@
             </aura:iteration>
         </lightning:select>
     </article>
-    <article class="slds-card slds-align_absolute-center" style="width: 50%;">
+    <article class="slds-card slds-align_absolute-center" style="width: 80%;">
         <lightning:dualListbox name="fields"
                            label= "Select Fields"
                            sourceLabel="Available Fields"
@@ -30,14 +30,14 @@
                            value="{!v.selectedFields}"
                            onchange="{! c.getQueryText }"/>
     </article>
-    <article class="slds-card slds-align_absolute-center" style="width: 50%;">
+    <article class="slds-card slds-align_absolute-center" style="width: 80%;">
         <lightning:textarea name="querybox" readonly="true" value="{!v.queryBoxText}" label="Query result" />
     </article>
     <div class="slds-align_absolute-center">
         <lightning:button variant="brand" label="Query" onclick="{!c.getQueryResult}"/>
     </div>
     
-    <article class="slds-card slds-align_absolute-center" style="width: 50%;">
+    <article class="slds-card slds-align_absolute-center" style="width: 80%;">
         <table>
             
             <aura:iteration items="{!v.selectedFields}" var="header">

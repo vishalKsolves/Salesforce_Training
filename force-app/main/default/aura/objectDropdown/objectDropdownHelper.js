@@ -1,5 +1,5 @@
-({ 
-    getSelectedFields: function(component) {
-        return component.get("v.selectedFields");        
+({
+    getSelectedFields: function (component) {
+      return component.get("v.selectedFields");
     }
-})
+  });
