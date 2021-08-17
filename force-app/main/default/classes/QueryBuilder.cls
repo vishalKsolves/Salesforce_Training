@@ -7,7 +7,6 @@ public with sharing class QueryBuilder {
            objects.add(sObjectType.getDescribe().getName());  
         }
         objects.sort();
-        System.debug(objects);
         return objects;
     }
     @AuraEnabled
