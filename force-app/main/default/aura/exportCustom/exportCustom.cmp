@@ -1,0 +1,20 @@
+<aura:component controller="ExportCustomObjectQueries">
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+
+    <aura:attribute name="dualOptions" type="List" />
+    <aura:attribute name="selectedFields" type="List" />
+    <aura:attribute name="blank" type="Boolean" />
+
+    <lightning:dualListbox name="customObjects"
+                           label= "Select Custom Objects"
+                           sourceLabel="Available Objects"
+                           selectedLabel="Selected Objects"
+                           fieldLevelHelp="Select objects to export"
+                           options="{!v.dualOptions}"
+                           value="{!v.selectedFields}"/>
+    <div class="slds-align_absolute-center">
+        <lightning:button label="Export" variant="brand" name="Export" type="submit" onclick="{!c.downloadCsv}"/>
+    </div>
+    
+</aura:component>
