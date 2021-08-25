@@ -1,5 +1,5 @@
 public with sharing class QueryBuilder {
-    @AuraEnabled
+    @AuraEnabled(cacheable=true)
     public static List<String> getObjectName(){
         List<String> objects = new List<String>();
         List<Schema.SObjectType> sObjectList = Schema.getGlobalDescribe().Values();  
@@ -9,7 +9,7 @@ public with sharing class QueryBuilder {
         objects.sort();
         return objects;
     }
-    @AuraEnabled
+    @AuraEnabled(cacheable=true)
     public static List<String> getFields(String sObjectAPIName){
         List<String> response = new List<String>();
         List<String> fieldNames = new List<String>();
