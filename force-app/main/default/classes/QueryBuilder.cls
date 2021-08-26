@@ -21,7 +21,7 @@ public with sharing class QueryBuilder {
         }
         return fieldNames;
     }
-    @AuraEnabled
+    @AuraEnabled(cacheable=true)
     public static List<List<String>> getQueryResults(String query, List<String> selectedValues){
         List<List<String>> response = new List<List<String>>();
         List<sObject> queryResult= Database.query(query);

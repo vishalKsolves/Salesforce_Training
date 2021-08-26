@@ -1,11 +1,16 @@
 import { LightningElement, api, wire } from 'lwc';
 import getObjectName from '@salesforce/apex/QueryBuilder.getObjectName';
 import getFields from '@salesforce/apex/QueryBuilder.getFields';
+import getQueryResults from '@salesforce/apex/QueryBuilder.getQueryResults';
 export default class LwcAssignment extends LightningElement {
     value = 'inProgress';
     options = [];
     objects = [];
     fields = [];
+    _selected = [];
+    records = [];
+    queryText = '';
+    tableVisibility = false;
     connectedCallback() {
         getObjectName()
             .then(result => {
@@ -15,7 +20,7 @@ export default class LwcAssignment extends LightningElement {
                 }
             })
             .catch(error => {
-                // Handle error. Details in error.message.
+                console.log(error);
             });
     }
 
@@ -24,11 +29,15 @@ export default class LwcAssignment extends LightningElement {
     }
 
     handleChange(event) {
+        this.tableVisibility = false;
+        this.fields = [];
+        this._selected = [];
+        this.records = [];
+        this.queryText = '';
         this.value = event.detail.value;
         getFields({sObjectAPIName : this.value})
             .then(result => {
                 for (let fields in result) {
-                    console.log(result.length);
                     this.fields = [...this.fields, { label: result[fields], value: result[fields] }];
 
                 }
@@ -38,7 +47,6 @@ export default class LwcAssignment extends LightningElement {
             });
     }
 
-    _selected = [];
 
     get dualOptions() {
         return this.fields;
@@ -48,17 +56,50 @@ export default class LwcAssignment extends LightningElement {
         return this._selected.length ? this._selected : 'none';
     }
 
-    handleChange2(e) {
+    handleDualList(e) {
+        this.tableVisibility = false;
+        this.records = [];
+        this.queryText = [];
         this._selected = e.detail.value;
-        let queryText = "SELECT ";
+        this.queryText = "SELECT ";
         let selectedValues = this._selected;
+        
         for (let i = 0; i < selectedValues.length; i++) {
             if (i == selectedValues.length - 1) {
-                queryText += selectedValues[i];
+                this.queryText += selectedValues[i];
                 break;
             }
-            queryText += selectedValues[i] + ", ";
+            this.queryText += selectedValues[i] + ", ";
         }
-        queryText += " FROM " + this.value;
+        this.queryText += " FROM " + this.value;
+    }
+
+    get generatedQuery() {
+        return this.queryText;
+    }
+
+    handleButtonClick() {
+        getQueryResults({query : this.queryText, selectedValues : this._selected})
+            .then(result => {
+                this.records = result;
+                this.tableVisibility = true;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
+    get records() {
+        return this.records;
+    }
+
+    get isDisabled() {
+        if(this.queryText === '')
+            return true;
+        return false;
+    }
+
+    get shouldVisible() {
+        return this.tableVisibility;
     }
 }

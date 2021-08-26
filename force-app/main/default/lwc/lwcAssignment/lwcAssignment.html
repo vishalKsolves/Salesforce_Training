@@ -1,17 +1,29 @@
 <template>
-    <lightning-combobox
-            name="progress"
-            label="Status"
-            value={value}
-            placeholder="Select Progress"
-            options={options}
-            onchange={handleChange} ></lightning-combobox>
+        <lightning-combobox name="Objects" label="Object API Names" value={value} placeholder="Select Progress"
+                options={options} onchange={handleChange}></lightning-combobox>
 
-    <lightning-dual-listbox name="languages"
-                            label="Select Languages"
-                            source-label="Available"
-                            selected-label="Selected"
-                            field-level-help="Select your preferred languages"
-                            options={dualOptions}
-                            onchange={handleChange2}></lightning-dual-listbox>
+        <lightning-dual-listbox name="languages" label="Select Fields" source-label="Available"
+                selected-label="Selected" field-level-help="Select your preferred languages" options={dualOptions}
+                value={_selected} onchange={handleDualList}></lightning-dual-listbox>
+
+        <lightning-textarea name="queryText" readonly value={generatedQuery} label="Read-only textarea field">
+        </lightning-textarea>
+
+        <lightning-button variant="brand" label="Query" title="Query" disabled={isDisabled} onclick={handleButtonClick}
+                class="slds-align_absolute-center slds-m-left_x-small"></lightning-button>
+
+        <template if:true={shouldVisible}>
+                <table>
+                        <template for:each={_selected} for:item="field">
+                                <th key={field}>{field}</th>
+                        </template>
+                        <template for:each={records} for:item="record">
+                                <tr key={record}>
+                                        <template for:each={record} for:item="data">
+                                                <td key={data}>{data}</td>
+                                        </template>
+                                </tr>
+                        </template>
+                </table>
+        </template>
 </template>
